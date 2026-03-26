@@ -1,0 +1,5 @@
+results/weights/
+results/generations.jsonl
+__pycache__/
+*.pyc
+.env

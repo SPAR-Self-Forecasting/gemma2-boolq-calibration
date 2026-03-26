@@ -1,0 +1,16 @@
+[project]
+name = "calibrated-qa"
+version = "0.2.0"
+license = "Apache-2.0"
+description = "Calibrated yes/no QA on BoolQ with passage; evaluated by 1 - Brier score."
+dependencies = [
+    "verifiers>=0.1.5.post0",
+    "datasets",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+include = ["calibrated_qa.py"]

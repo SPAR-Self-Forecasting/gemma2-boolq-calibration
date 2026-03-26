@@ -1,0 +1,574 @@
+/root/prime-rl/.venv/lib/python3.12/site-packages/tyro/_resolver.py:600: TyroWarning: <class 'prime_rl.configs.orchestrator.DefaultAdvantageConfig'> does not match any type in Union: [<class 'types.UnionType'>, <class 'NoneType'>]
+  warnings.warn(
+[2m19:06:04[0m [1m   INFO[0m [1m[22mStarting orchestrator[0m[0m
+[2m19:06:04[0m [33m[1mWARNING[0m [33m[1m[22mToken-in-token-out (TITO) client is enabled. Only use this if your environment has a linear history and the chat template has the extension property.[0m[0m
+[2m19:06:04[0m [1m   INFO[0m [1m[22mInitializing static inference pool (base_url=http://localhost:8000/v1, dp_rank_count=1, api_key_var=VLLM_API_KEY, headers={})[0m[0m
+[2m19:06:04[0m [1m   INFO[0m [1m[22mInitializing tokenizer for google/gemma-2-2b-it[0m[0m
+[2m19:06:07[0m [1m   INFO[0m [1m[22mInitializing monitor (wandb=project='calibrated-qa' name='calibrated-qa-gemma2-2b-orchestrator' offline=True log_extras=LogExtrasConfig(samples=True, distributions=True, interval=10, sample_ratio=None), prime_monitor=None)[0m[0m
+[2m19:06:07[0m [1m   INFO[0m [1m[22mInitializing WandbMonitor (project='calibrated-qa' name='calibrated-qa-gemma2-2b-orchestrator' offline=True log_extras=LogExtrasConfig(samples=True, distributions=True, interval=10, sample_ratio=None))[0m[0m
+wandb: Tracking run with wandb version 0.24.2
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /root/outputs/calibrated-qa-gemma2-2b/rl/run_default/wandb/offline-run-20260326_190607-bc5zb82e
+wandb: Detected [anthropic, openai, verifiers] in use.
+wandb: Use W&B Weave for improved LLM call tracing. Install Weave with `pip install weave` then add `import weave` to the top of your script.
+wandb: For more information, check out the docs at: https://weave-docs.wandb.ai/
+[2m19:06:08[0m [1m   INFO[0m [1m[22mInitialized 2 rollout filter(s): ['gibberish', 'repetition'][0m[0m
+[2m19:06:08[0m [1m   INFO[0m [1m[22mLoading 1 training environment(s) (calibrated-qa)[0m[0m
+Generating train split:   0%|          | 0/9427 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 9427/9427 [00:00<00:00, 235223.77 examples/s]
+Generating validation split:   0%|          | 0/3270 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 3270/3270 [00:00<00:00, 464864.90 examples/s]
+Filter:   0%|          | 0/9427 [00:00<?, ? examples/s]Filter: 100%|██████████| 9427/9427 [00:00<00:00, 99556.36 examples/s]
+Filter:   0%|          | 0/9427 [00:00<?, ? examples/s]Filter: 100%|██████████| 9427/9427 [00:00<00:00, 110297.29 examples/s]
+Map:   0%|          | 0/7106 [00:00<?, ? examples/s]Map:  21%|██▏       | 1521/7106 [00:00<00:00, 15116.49 examples/s]Map:  53%|█████▎    | 3799/7106 [00:00<00:00, 11767.61 examples/s]Map:  73%|███████▎  | 5183/7106 [00:00<00:00, 12458.83 examples/s]Map:  92%|█████████▏| 6513/7106 [00:00<00:00, 12727.63 examples/s]Map: 100%|██████████| 7106/7106 [00:00<00:00, 12706.73 examples/s]
+The parser and rubric parser are different. This may cause unexpected behavior.
+Map:   0%|          | 0/7106 [00:00<?, ? examples/s]Map:  35%|███▍      | 2469/7106 [00:00<00:00, 24557.41 examples/s]Map:  70%|██████▉   | 4974/7106 [00:00<00:00, 24843.65 examples/s]Map: 100%|██████████| 7106/7106 [00:00<00:00, 13235.70 examples/s]
+Map:   0%|          | 0/7106 [00:00<?, ? examples/s]Map:   3%|▎         | 236/7106 [00:00<00:02, 2341.03 examples/s]Map:   7%|▋         | 486/7106 [00:00<00:02, 2425.48 examples/s]Map:  10%|█         | 735/7106 [00:00<00:02, 2451.51 examples/s]Map:  14%|█▍        | 985/7106 [00:00<00:02, 2467.52 examples/s]Map:  17%|█▋        | 1234/7106 [00:00<00:02, 2474.52 examples/s]Map:  21%|██        | 1485/7106 [00:00<00:02, 2480.53 examples/s]Map:  24%|██▍       | 1735/7106 [00:00<00:02, 2481.41 examples/s]Map:  28%|██▊       | 1985/7106 [00:00<00:02, 2482.17 examples/s]Map:  33%|███▎      | 2357/7106 [00:00<00:01, 2477.20 examples/s]Map:  37%|███▋      | 2607/7106 [00:01<00:01, 2481.76 examples/s]Map:  40%|████      | 2858/7106 [00:01<00:01, 2486.61 examples/s]Map:  44%|████▍     | 3109/7106 [00:01<00:01, 2490.17 examples/s]Map:  47%|████▋     | 3360/7106 [00:01<00:01, 2493.40 examples/s]Map:  51%|█████     | 3611/7106 [00:01<00:01, 2495.34 examples/s]Map:  54%|█████▍    | 3862/7106 [00:01<00:01, 2495.93 examples/s]Map:  58%|█████▊    | 4113/7106 [00:01<00:01, 2495.35 examples/s]Map:  61%|██████▏   | 4364/7106 [00:01<00:01, 2497.82 examples/s]Map:  65%|██████▍   | 4615/7106 [00:01<00:00, 2497.27 examples/s]Map:  68%|██████▊   | 4866/7106 [00:01<00:00, 2496.18 examples/s]Map:  72%|███████▏  | 5116/7106 [00:02<00:00, 2495.24 examples/s]Map:  76%|███████▌  | 5366/7106 [00:02<00:00, 2491.93 examples/s]Map:  81%|████████  | 5740/7106 [00:02<00:00, 2491.73 examples/s]Map:  84%|████████▍ | 5990/7106 [00:02<00:00, 2491.61 examples/s]Map:  90%|████████▉ | 6364/7106 [00:02<00:00, 2490.37 examples/s]Map:  95%|█████████▍| 6739/7106 [00:02<00:00, 2491.48 examples/s]Map:  98%|█████████▊| 6990/7106 [00:02<00:00, 2492.11 examples/s]Map: 100%|██████████| 7106/7106 [00:02<00:00, 2433.71 examples/s]
+Map:   0%|          | 0/7106 [00:00<?, ? examples/s]Map:   3%|▎         | 248/7106 [00:00<00:02, 2443.60 examples/s]Map:   7%|▋         | 495/7106 [00:00<00:02, 2450.66 examples/s]Map:  10%|█         | 746/7106 [00:00<00:02, 2470.65 examples/s]Map:  14%|█▍        | 996/7106 [00:00<00:02, 2479.39 examples/s]Map:  18%|█▊        | 1248/7106 [00:00<00:02, 2489.97 examples/s]Map:  21%|██        | 1498/7106 [00:00<00:02, 2489.48 examples/s]Map:  26%|██▌       | 1859/7106 [00:00<00:02, 2450.22 examples/s]Map:  30%|██▉       | 2107/7106 [00:00<00:02, 2456.39 examples/s]Map:  33%|███▎      | 2356/7106 [00:00<00:01, 2463.38 examples/s]Map:  37%|███▋      | 2606/7106 [00:01<00:01, 2471.03 examples/s]Map:  40%|████      | 2855/7106 [00:01<00:01, 2474.50 examples/s]Map:  44%|████▎     | 3105/7106 [00:01<00:01, 2479.62 examples/s]Map:  47%|████▋     | 3354/7106 [00:01<00:01, 2479.86 examples/s]Map:  52%|█████▏    | 3726/7106 [00:01<00:01, 2476.23 examples/s]Map:  58%|█████▊    | 4098/7106 [00:01<00:01, 2473.22 examples/s]Map:  61%|██████    | 4347/7106 [00:01<00:01, 2475.86 examples/s]Map:  65%|██████▍   | 4597/7106 [00:01<00:01, 2477.95 examples/s]Map:  68%|██████▊   | 4846/7106 [00:01<00:00, 2478.54 examples/s]Map:  72%|███████▏  | 5094/7106 [00:02<00:00, 2477.43 examples/s]Map:  75%|███████▌  | 5345/7106 [00:02<00:00, 2482.42 examples/s]Map:  79%|███████▉  | 5596/7106 [00:02<00:00, 2486.43 examples/s]Map:  82%|████████▏ | 5846/7106 [00:02<00:00, 2487.67 examples/s]Map:  86%|████████▌ | 6097/7106 [00:02<00:00, 2493.25 examples/s]Map:  89%|████████▉ | 6347/7106 [00:02<00:00, 2491.47 examples/s]Map:  95%|█████████▍| 6720/7106 [00:02<00:00, 2488.73 examples/s]Map: 100%|█████████▉| 7092/7106 [00:02<00:00, 2482.16 examples/s]Map: 100%|██████████| 7106/7106 [00:02<00:00, 2421.86 examples/s]
+[2m19:06:17[0m [1m   INFO[0m [1m[22mSpawned env server for calibrated-qa with 4 worker(s)[0m[0m
+[2m19:06:17[0m [1m   INFO[0m [1m[22mConnecting train environment calibrated-qa to server at tcp://127.0.0.1:45839[0m[0m
+[2m19:06:17[0m [1m   INFO[0m [1m[22mWaiting for train environment servers to be ready[0m[0m
+[2m19:06:17[0m [1m   INFO[0m [1m[22mWaiting for env server calibrated-qa (tcp://127.0.0.1:45839) to become healthy (timeout=10m)[0m[0m
+[2m19:06:27[0m [1m   INFO[0m [1m[22mEnv server calibrated-qa (tcp://127.0.0.1:45839) became healthy (was startup)[0m[0m
+[2m19:06:27[0m [1m   INFO[0m [1m[22mEnv server calibrated-qa (tcp://127.0.0.1:45839) is healthy[0m[0m
+[2m19:06:27[0m [32m[1mSUCCESS[0m [32m[1m[22mTrain environment servers ready[0m[0m
+[2m19:06:27[0m [1m   INFO[0m [1m[22mSetting up buffer (seed=None env_ratios=None easy_threshold=None hard_threshold=None easy_fraction=0.0 hard_fraction=0.0 online_difficulty_filtering=False hash_keys=['task', 'prompt'])[0m[0m
+[2m19:06:28[0m [1m   INFO[0m [1m[22mInitializing checkpoint manager (interval=None resume_step=None wait_for_weights_timeout=None keep_last=None keep_interval=None skip_progress=False skip_buffer=False)[0m[0m
+[2m19:06:28[0m [1m   INFO[0m [1m[22mWaiting for inference pool to be ready[0m[0m
+[2m19:06:38[0m [33m[1mWARNING[0m [33m[1m[22mInference server was not reached after 10 seconds (Error: All connection attempts failed) on http://localhost:8000[0m[0m
+[2m19:06:48[0m [33m[1mWARNING[0m [33m[1m[22mInference server was not reached after 20 seconds (Error: All connection attempts failed) on http://localhost:8000[0m[0m
+[2m19:06:58[0m [33m[1mWARNING[0m [33m[1m[22mInference server was not reached after 30 seconds (Error: All connection attempts failed) on http://localhost:8000[0m[0m
+[2m19:07:07[0m [32m[1mSUCCESS[0m [32m[1m[22mInference pool ready[0m[0m
+[2m19:07:07[0m [1m   INFO[0m [1m[22mInitializing weight broadcast (type='filesystem')[0m[0m
+[2m19:07:07[0m [1m   INFO[0m [1m[22mInitializing training batch sender (type='filesystem')[0m[0m
+[2m19:07:07[0m [1m   INFO[0m [1m[22mTraining from scratch[0m[0m
+[2m19:07:07[0m [1m   INFO[0m [1m[22mStarting orchestrator loop (max_steps=50)[0m[0m
+[2m19:07:07[0m [1m   INFO[0m [1m[22mStarting orchestrator step 0[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train):   1%|          | 8/1024 [00:02<05:46,  2.93it/s]Generating rollouts (train):   2%|▏         | 24/1024 [00:03<01:43,  9.65it/s]Generating rollouts (train):   4%|▍         | 40/1024 [00:03<01:00, 16.21it/s]Generating rollouts (train):  19%|█▉        | 192/1024 [00:03<00:06, 119.19it/s]Generating rollouts (train):  24%|██▍       | 248/1024 [00:03<00:05, 148.06it/s]Generating rollouts (train):  29%|██▉       | 296/1024 [00:04<00:06, 118.47it/s]Generating rollouts (train):  33%|███▎      | 336/1024 [00:04<00:05, 130.24it/s]Generating rollouts (train):  38%|███▊      | 384/1024 [00:04<00:03, 163.46it/s]Generating rollouts (train):  41%|████▏     | 424/1024 [00:05<00:04, 136.31it/s]Generating rollouts (train):  45%|████▌     | 464/1024 [00:05<00:03, 163.20it/s]Generating rollouts (train):  48%|████▊     | 496/1024 [00:05<00:03, 153.26it/s]Generating rollouts (train):  51%|█████     | 520/1024 [00:05<00:03, 154.63it/s]Generating rollouts (train):  55%|█████▍    | 560/1024 [00:06<00:03, 124.50it/s]Generating rollouts (train):  61%|██████    | 624/1024 [00:06<00:02, 179.37it/s]Generating rollouts (train):  64%|██████▍   | 656/1024 [00:06<00:02, 169.15it/s]Generating rollouts (train):  68%|██████▊   | 696/1024 [00:06<00:02, 130.42it/s]Generating rollouts (train):  71%|███████   | 728/1024 [00:07<00:01, 151.60it/s]Generating rollouts (train):  73%|███████▎  | 752/1024 [00:07<00:01, 143.50it/s]Generating rollouts (train):  77%|███████▋  | 792/1024 [00:07<00:01, 176.08it/s]Generating rollouts (train):  80%|████████  | 824/1024 [00:07<00:01, 187.42it/s]Generating rollouts (train):  85%|████████▌ | 872/1024 [00:07<00:01, 137.59it/s]Generating rollouts (train):  88%|████████▊ | 896/1024 [00:08<00:00, 148.27it/s]Generating rollouts (train):  91%|█████████▏| 936/1024 [00:08<00:00, 184.02it/s]Generating rollouts (train):  95%|█████████▍| 968/1024 [00:08<00:00, 197.70it/s]Generating rollouts (train):  98%|█████████▊| 1000/1024 [00:08<00:00, 179.62it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:08<00:00, 139.81it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:08<00:00, 115.70it/s]
+[2m19:07:16[0m [1m   INFO[0m [1m[22mDetected 2/1024 rollouts (gibberish=2)[0m[0m
+[2m19:07:16[0m [1m   INFO[0m [1m[22mLogging samples to W&B table at step 0[0m[0m
+[2m19:07:16[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 0 | Time: 8.98s | Reward: 0.3787 | Seq. Length: 473.6 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m19:07:17[0m [1m   INFO[0m [1m[22mStarting orchestrator step 1[0m[0m
+[2m19:07:17[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 1 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m19:09:10[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 1 ready (after 113.12s)[0m[0m
+[2m19:09:10[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:09:10[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:09:10[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 18307.62it/s]
+[2m19:09:11[0m [1m   INFO[0m [1m[22mDetected 1/1024 rollouts (gibberish=1)[0m[0m
+[2m19:09:11[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 1 | Time: 114.00s | Reward: 0.3305 | Seq. Length: 470.2 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 1[0m[0m
+[2m19:09:11[0m [1m   INFO[0m [1m[22mStarting orchestrator step 2[0m[0m
+[2m19:09:11[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 2 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m19:10:58[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 2 ready (after 107.11s)[0m[0m
+[2m19:10:58[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:10:58[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:10:59[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 17971.85it/s]
+[2m19:10:59[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 2 | Time: 107.97s | Reward: 0.4267 | Seq. Length: 466.5 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 2[0m[0m
+[2m19:10:59[0m [1m   INFO[0m [1m[22mStarting orchestrator step 3[0m[0m
+[2m19:10:59[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 3 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[calibrated_qa] Wrote 1000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 1000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 1000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 1000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[2m19:12:45[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 3 ready (after 106.11s)[0m[0m
+[2m19:12:45[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:12:45[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:12:46[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 17102.57it/s]
+[2m19:12:46[0m [1m   INFO[0m [1m[22mDetected 1/1024 rollouts (gibberish=1)[0m[0m
+[2m19:12:46[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 3 | Time: 107.05s | Reward: 0.5039 | Seq. Length: 476.7 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 3[0m[0m
+[2m19:12:47[0m [1m   INFO[0m [1m[22mStarting orchestrator step 4[0m[0m
+[2m19:12:47[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 4 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m19:14:35[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 4 ready (after 108.12s)[0m[0m
+[2m19:14:35[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:14:35[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:14:35[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 13782.40it/s]
+[2m19:14:36[0m [1m   INFO[0m [1m[22mDetected 8/1024 rollouts (gibberish=8)[0m[0m
+[2m19:14:36[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 4 | Time: 109.01s | Reward: 0.5686 | Seq. Length: 486.6 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 3[0m[0m
+[2m19:14:36[0m [1m   INFO[0m [1m[22mStarting orchestrator step 5[0m[0m
+[2m19:14:36[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 5 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m19:16:26[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 5 ready (after 110.11s)[0m[0m
+[2m19:16:26[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:16:26[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:16:27[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 14155.89it/s]
+[2m19:16:27[0m [1m   INFO[0m [1m[22mDetected 6/1024 rollouts (gibberish=6)[0m[0m
+[2m19:16:27[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 5 | Time: 111.03s | Reward: 0.7134 | Seq. Length: 504.0 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 4[0m[0m
+[2m19:16:27[0m [1m   INFO[0m [1m[22mStarting orchestrator step 6[0m[0m
+[2m19:16:27[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 6 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m19:18:21[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 6 ready (after 114.12s)[0m[0m
+[2m19:18:21[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:18:21[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:18:22[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 17471.36it/s]
+[2m19:18:22[0m [1m   INFO[0m [1m[22mDetected 7/1024 rollouts (gibberish=7)[0m[0m
+[2m19:18:23[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 6 | Time: 115.31s | Reward: 0.8103 | Seq. Length: 519.5 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 3[0m[0m
+[2m19:18:23[0m [1m   INFO[0m [1m[22mStarting orchestrator step 7[0m[0m
+[2m19:18:23[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 7 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[calibrated_qa] Wrote 2000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 2000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 2000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 2000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[2m19:20:20[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 7 ready (after 117.13s)[0m[0m
+[2m19:20:20[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:20:20[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:20:21[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 16796.83it/s]
+[2m19:20:21[0m [1m   INFO[0m [1m[22mDetected 11/1024 rollouts (gibberish=11)[0m[0m
+[2m19:20:21[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 7 | Time: 118.03s | Reward: 0.8331 | Seq. Length: 526.4 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 4[0m[0m
+[2m19:20:21[0m [1m   INFO[0m [1m[22mStarting orchestrator step 8[0m[0m
+[2m19:20:21[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 8 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m19:22:19[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 8 ready (after 118.13s)[0m[0m
+[2m19:22:19[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:22:19[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:22:20[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 14762.28it/s]
+[2m19:22:20[0m [1m   INFO[0m [1m[22mDetected 16/1024 rollouts (gibberish=16)[0m[0m
+[2m19:22:20[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 8 | Time: 119.10s | Reward: 0.8315 | Seq. Length: 536.3 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 1[0m[0m
+[2m19:22:21[0m [1m   INFO[0m [1m[22mStarting orchestrator step 9[0m[0m
+[2m19:22:21[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 9 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m19:24:21[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 9 ready (after 120.13s)[0m[0m
+[2m19:24:21[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:24:21[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:24:21[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 16000.80it/s]
+[2m19:24:22[0m [1m   INFO[0m [1m[22mDetected 17/1024 rollouts (gibberish=17)[0m[0m
+[2m19:24:22[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 9 | Time: 121.07s | Reward: 0.8612 | Seq. Length: 564.2 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 2[0m[0m
+[2m19:24:22[0m [1m   INFO[0m [1m[22mStarting orchestrator step 10[0m[0m
+[2m19:24:22[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 10 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m19:26:29[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 10 ready (after 127.13s)[0m[0m
+[2m19:26:29[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:26:29[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:26:30[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 10841.58it/s]
+[2m19:26:30[0m [1m   INFO[0m [1m[22mDetected 46/1024 rollouts (gibberish=46)[0m[0m
+[2m19:26:30[0m [1m   INFO[0m [1m[22mLogging samples to W&B table at step 10[0m[0m
+[2m19:26:30[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 10 | Time: 128.21s | Reward: 0.6598 | Seq. Length: 674.1 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 1[0m[0m
+[2m19:26:31[0m [1m   INFO[0m [1m[22mStarting orchestrator step 11[0m[0m
+[2m19:26:31[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 11 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[calibrated_qa] Wrote 3000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 3000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 3000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 3000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[2m19:29:01[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 11 ready (after 150.15s)[0m[0m
+[2m19:29:01[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:29:01[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:29:02[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 10004.72it/s]
+[2m19:29:02[0m [1m   INFO[0m [1m[22mDetected 65/1024 rollouts (gibberish=65)[0m[0m
+[2m19:29:02[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 11 | Time: 151.43s | Reward: 0.3598 | Seq. Length: 741.3 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 2[0m[0m
+[2m19:29:03[0m [1m   INFO[0m [1m[22mStarting orchestrator step 12[0m[0m
+[2m19:29:03[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 12 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m19:31:49[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 12 ready (after 166.17s)[0m[0m
+[2m19:31:49[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:31:49[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:31:49[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 13519.37it/s]
+[2m19:31:50[0m [1m   INFO[0m [1m[22mDetected 89/1024 rollouts (gibberish=89)[0m[0m
+[2m19:31:50[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 12 | Time: 167.17s | Reward: 0.2697 | Seq. Length: 759.7 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 1[0m[0m
+[2m19:31:50[0m [1m   INFO[0m [1m[22mStarting orchestrator step 13[0m[0m
+[2m19:31:50[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 13 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m19:34:41[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 13 ready (after 171.18s)[0m[0m
+[2m19:34:41[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:34:41[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:34:42[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 14339.64it/s]
+[2m19:34:42[0m [1m   INFO[0m [1m[22mDetected 66/1024 rollouts (gibberish=66)[0m[0m
+[2m19:34:42[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 13 | Time: 172.20s | Reward: 0.4517 | Seq. Length: 726.6 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 2[0m[0m
+[2m19:34:43[0m [1m   INFO[0m [1m[22mStarting orchestrator step 14[0m[0m
+[2m19:34:43[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 14 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m19:37:26[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 14 ready (after 163.17s)[0m[0m
+[2m19:37:26[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:37:26[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:37:26[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 14281.19it/s]
+[2m19:37:27[0m [1m   INFO[0m [1m[22mDetected 52/1024 rollouts (gibberish=52)[0m[0m
+[2m19:37:27[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 14 | Time: 164.18s | Reward: 0.6658 | Seq. Length: 681.4 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 1[0m[0m
+[2m19:37:27[0m [1m   INFO[0m [1m[22mStarting orchestrator step 15[0m[0m
+[2m19:37:27[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 15 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[calibrated_qa] Wrote 4000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 4000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 4000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 4000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[2m19:39:59[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 15 ready (after 152.16s)[0m[0m
+[2m19:39:59[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:39:59[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:40:00[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 15453.80it/s]
+[2m19:40:00[0m [1m   INFO[0m [1m[22mDetected 36/1024 rollouts (gibberish=36)[0m[0m
+[2m19:40:00[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 15 | Time: 153.10s | Reward: 0.8080 | Seq. Length: 634.9 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 1[0m[0m
+[2m19:40:00[0m [1m   INFO[0m [1m[22mStarting orchestrator step 16[0m[0m
+[2m19:40:00[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 16 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m19:42:23[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 16 ready (after 142.14s)[0m[0m
+[2m19:42:23[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:42:23[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:42:23[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 15702.23it/s]
+[2m19:42:23[0m [1m   INFO[0m [1m[22mDetected 29/1024 rollouts (gibberish=29)[0m[0m
+[2m19:42:24[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 16 | Time: 143.06s | Reward: 0.8363 | Seq. Length: 607.1 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 1[0m[0m
+[2m19:42:24[0m [1m   INFO[0m [1m[22mStarting orchestrator step 17[0m[0m
+[2m19:42:24[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 17 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m19:44:40[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 17 ready (after 136.14s)[0m[0m
+[2m19:44:40[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:44:40[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:44:41[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 15873.72it/s]
+[2m19:44:41[0m [1m   INFO[0m [1m[22mDetected 25/1024 rollouts (gibberish=25)[0m[0m
+[2m19:44:41[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 17 | Time: 137.12s | Reward: 0.8123 | Seq. Length: 580.9 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 2[0m[0m
+[2m19:44:41[0m [1m   INFO[0m [1m[22mStarting orchestrator step 18[0m[0m
+[2m19:44:41[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 18 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m19:46:52[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 18 ready (after 131.14s)[0m[0m
+[2m19:46:52[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:46:52[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:46:53[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 11841.65it/s]
+[2m19:46:53[0m [1m   INFO[0m [1m[22mDetected 19/1024 rollouts (gibberish=19)[0m[0m
+[2m19:46:53[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 18 | Time: 132.14s | Reward: 0.8407 | Seq. Length: 568.7 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 1[0m[0m
+[2m19:46:54[0m [1m   INFO[0m [1m[22mStarting orchestrator step 19[0m[0m
+[2m19:46:54[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 19 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[calibrated_qa] Wrote 5000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 5000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 5000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 5000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[2m19:49:03[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 19 ready (after 129.13s)[0m[0m
+[2m19:49:03[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:49:03[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:49:03[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 14252.80it/s]
+[2m19:49:04[0m [1m   INFO[0m [1m[22mDetected 18/1024 rollouts (gibberish=18)[0m[0m
+[2m19:49:04[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 19 | Time: 130.12s | Reward: 0.8508 | Seq. Length: 563.3 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 1[0m[0m
+[2m19:49:04[0m [1m   INFO[0m [1m[22mStarting orchestrator step 20[0m[0m
+[2m19:49:04[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 20 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m19:51:11[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 20 ready (after 127.12s)[0m[0m
+[2m19:51:11[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:51:11[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:51:12[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 11811.04it/s]
+[2m19:51:12[0m [1m   INFO[0m [1m[22mDetected 16/1024 rollouts (gibberish=16)[0m[0m
+[2m19:51:13[0m [1m   INFO[0m [1m[22mLogging samples to W&B table at step 20[0m[0m
+[2m19:51:13[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 20 | Time: 128.36s | Reward: 0.8560 | Seq. Length: 563.5 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 1[0m[0m
+[2m19:51:13[0m [1m   INFO[0m [1m[22mStarting orchestrator step 21[0m[0m
+[2m19:51:13[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 21 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m19:53:21[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 21 ready (after 128.14s)[0m[0m
+[2m19:53:21[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:53:21[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:53:22[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 15195.03it/s]
+[2m19:53:22[0m [1m   INFO[0m [1m[22mDetected 21/1024 rollouts (gibberish=21)[0m[0m
+[2m19:53:22[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 21 | Time: 129.28s | Reward: 0.8606 | Seq. Length: 556.4 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 2[0m[0m
+[2m19:53:23[0m [1m   INFO[0m [1m[22mStarting orchestrator step 22[0m[0m
+[2m19:53:23[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 22 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m19:55:29[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 22 ready (after 126.14s)[0m[0m
+[2m19:55:29[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:55:29[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:55:29[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 15396.74it/s]
+[2m19:55:30[0m [1m   INFO[0m [1m[22mDetected 15/1024 rollouts (gibberish=15)[0m[0m
+[2m19:55:30[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 22 | Time: 127.04s | Reward: 0.8633 | Seq. Length: 562.6 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m19:55:30[0m [1m   INFO[0m [1m[22mStarting orchestrator step 23[0m[0m
+[2m19:55:30[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 23 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[calibrated_qa] Wrote 6000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 6000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 6000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 6000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[2m19:57:37[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 23 ready (after 127.13s)[0m[0m
+[2m19:57:37[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:57:37[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:57:38[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 15950.12it/s]
+[2m19:57:38[0m [1m   INFO[0m [1m[22mDetected 16/1024 rollouts (gibberish=16)[0m[0m
+[2m19:57:38[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 23 | Time: 128.11s | Reward: 0.8521 | Seq. Length: 545.2 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m19:57:38[0m [1m   INFO[0m [1m[22mStarting orchestrator step 24[0m[0m
+[2m19:57:39[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 24 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m19:59:42[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 24 ready (after 123.13s)[0m[0m
+[2m19:59:42[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m19:59:42[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m19:59:42[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 16857.42it/s]
+[2m19:59:42[0m [1m   INFO[0m [1m[22mDetected 18/1024 rollouts (gibberish=18)[0m[0m
+[2m19:59:43[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 24 | Time: 124.09s | Reward: 0.8563 | Seq. Length: 555.6 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m19:59:43[0m [1m   INFO[0m [1m[22mStarting orchestrator step 25[0m[0m
+[2m19:59:43[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 25 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m20:01:49[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 25 ready (after 126.13s)[0m[0m
+[2m20:01:49[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:01:49[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:01:50[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 15807.17it/s]
+[2m20:01:50[0m [1m   INFO[0m [1m[22mDetected 15/1024 rollouts (gibberish=15)[0m[0m
+[2m20:01:50[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 25 | Time: 127.03s | Reward: 0.8514 | Seq. Length: 548.5 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m20:01:50[0m [1m   INFO[0m [1m[22mStarting orchestrator step 26[0m[0m
+[2m20:01:50[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 26 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m20:03:53[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 26 ready (after 123.13s)[0m[0m
+[2m20:03:53[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:03:53[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:03:54[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 15842.92it/s]
+[2m20:03:54[0m [1m   INFO[0m [1m[22mDetected 13/1024 rollouts (gibberish=13)[0m[0m
+[2m20:03:54[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 26 | Time: 124.05s | Reward: 0.8633 | Seq. Length: 550.3 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m20:03:55[0m [1m   INFO[0m [1m[22mStarting orchestrator step 27[0m[0m
+[2m20:03:55[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 27 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[calibrated_qa] Wrote 7000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 7000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 7000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 7000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[2m20:05:59[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 27 ready (after 124.13s)[0m[0m
+[2m20:05:59[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:05:59[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:05:59[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 16461.11it/s]
+[2m20:05:59[0m [1m   INFO[0m [1m[22mDetected 15/1024 rollouts (gibberish=15)[0m[0m
+[2m20:06:00[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 27 | Time: 125.09s | Reward: 0.8616 | Seq. Length: 558.6 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m20:06:00[0m [1m   INFO[0m [1m[22mStarting orchestrator step 28[0m[0m
+[2m20:06:00[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 28 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m20:08:07[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 28 ready (after 127.14s)[0m[0m
+[2m20:08:07[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:08:07[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:08:08[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 15361.33it/s]
+[2m20:08:08[0m [1m   INFO[0m [1m[22mDetected 13/1024 rollouts (gibberish=13)[0m[0m
+[2m20:08:08[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 28 | Time: 128.09s | Reward: 0.8753 | Seq. Length: 544.3 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m20:08:08[0m [1m   INFO[0m [1m[22mStarting orchestrator step 29[0m[0m
+[2m20:08:08[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 29 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m20:10:12[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 29 ready (after 124.13s)[0m[0m
+[2m20:10:12[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:10:12[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:10:13[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 13469.76it/s]
+[2m20:10:13[0m [1m   INFO[0m [1m[22mDetected 13/1024 rollouts (gibberish=13)[0m[0m
+[2m20:10:13[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 29 | Time: 125.08s | Reward: 0.8596 | Seq. Length: 554.6 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m20:10:14[0m [1m   INFO[0m [1m[22mStarting orchestrator step 30[0m[0m
+[2m20:10:14[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 30 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m20:12:20[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 30 ready (after 126.14s)[0m[0m
+[2m20:12:20[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:12:20[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:12:20[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 15353.97it/s]
+[2m20:12:21[0m [1m   INFO[0m [1m[22mDetected 9/1024 rollouts (gibberish=9)[0m[0m
+[2m20:12:21[0m [1m   INFO[0m [1m[22mLogging samples to W&B table at step 30[0m[0m
+[2m20:12:21[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 30 | Time: 127.07s | Reward: 0.8752 | Seq. Length: 553.4 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m20:12:21[0m [1m   INFO[0m [1m[22mStarting orchestrator step 31[0m[0m
+[2m20:12:21[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 31 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[calibrated_qa] Wrote 8000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 8000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 8000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 8000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[2m20:14:27[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 31 ready (after 126.14s)[0m[0m
+[2m20:14:27[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:14:27[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:14:28[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 12693.56it/s]
+[2m20:14:28[0m [1m   INFO[0m [1m[22mDetected 14/1024 rollouts (gibberish=14)[0m[0m
+[2m20:14:28[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 31 | Time: 127.14s | Reward: 0.8463 | Seq. Length: 544.7 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m20:14:29[0m [1m   INFO[0m [1m[22mStarting orchestrator step 32[0m[0m
+[2m20:14:29[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 32 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m20:16:33[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 32 ready (after 124.14s)[0m[0m
+[2m20:16:33[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:16:33[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:16:33[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 11035.94it/s]
+[2m20:16:34[0m [1m   INFO[0m [1m[22mDetected 18/1024 rollouts (gibberish=18)[0m[0m
+[2m20:16:34[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 32 | Time: 125.20s | Reward: 0.8441 | Seq. Length: 546.3 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m20:16:34[0m [1m   INFO[0m [1m[22mStarting orchestrator step 33[0m[0m
+[2m20:16:34[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 33 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m20:18:38[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 33 ready (after 124.14s)[0m[0m
+[2m20:18:38[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:18:38[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:18:39[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 15415.81it/s]
+[2m20:18:39[0m [1m   INFO[0m [1m[22mDetected 9/1024 rollouts (gibberish=9)[0m[0m
+[2m20:18:39[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 33 | Time: 125.10s | Reward: 0.8949 | Seq. Length: 553.3 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m20:18:40[0m [1m   INFO[0m [1m[22mStarting orchestrator step 34[0m[0m
+[2m20:18:40[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 34 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m20:20:45[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 34 ready (after 125.13s)[0m[0m
+[2m20:20:45[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:20:45[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:20:45[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 10754.41it/s]
+[2m20:20:46[0m [1m   INFO[0m [1m[22mDetected 10/1024 rollouts (gibberish=10)[0m[0m
+[2m20:20:46[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 34 | Time: 126.16s | Reward: 0.8663 | Seq. Length: 551.4 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m20:20:46[0m [1m   INFO[0m [1m[22mStarting orchestrator step 35[0m[0m
+[2m20:20:46[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 35 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[calibrated_qa] Wrote 9000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 9000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 9000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 9000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[2m20:22:51[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 35 ready (after 125.14s)[0m[0m
+[2m20:22:51[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:22:51[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:22:52[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 12349.17it/s]
+[2m20:22:52[0m [1m   INFO[0m [1m[22mDetected 9/1024 rollouts (gibberish=9)[0m[0m
+[2m20:22:52[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 35 | Time: 126.13s | Reward: 0.8740 | Seq. Length: 537.4 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 1[0m[0m
+[2m20:22:53[0m [1m   INFO[0m [1m[22mStarting orchestrator step 36[0m[0m
+[2m20:22:53[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 36 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m20:24:56[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 36 ready (after 123.13s)[0m[0m
+[2m20:24:56[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:24:56[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:24:56[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 12194.41it/s]
+[2m20:24:56[0m [1m   INFO[0m [1m[22mDetected 14/1024 rollouts (gibberish=14)[0m[0m
+[2m20:24:57[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 36 | Time: 124.12s | Reward: 0.8726 | Seq. Length: 559.9 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m20:24:57[0m [1m   INFO[0m [1m[22mStarting orchestrator step 37[0m[0m
+[2m20:24:57[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 37 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m20:27:04[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 37 ready (after 127.13s)[0m[0m
+[2m20:27:04[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:27:04[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:27:05[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 11791.85it/s]
+[2m20:27:05[0m [1m   INFO[0m [1m[22mDetected 14/1024 rollouts (gibberish=14)[0m[0m
+[2m20:27:05[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 37 | Time: 128.15s | Reward: 0.8745 | Seq. Length: 544.2 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m20:27:05[0m [1m   INFO[0m [1m[22mStarting orchestrator step 38[0m[0m
+[2m20:27:06[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 38 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m20:29:09[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 38 ready (after 123.13s)[0m[0m
+[2m20:29:09[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:29:09[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:29:09[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 11806.56it/s]
+[2m20:29:09[0m [1m   INFO[0m [1m[22mDetected 11/1024 rollouts (gibberish=11)[0m[0m
+[2m20:29:10[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 38 | Time: 124.18s | Reward: 0.8894 | Seq. Length: 551.3 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m20:29:10[0m [1m   INFO[0m [1m[22mStarting orchestrator step 39[0m[0m
+[2m20:29:10[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 39 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[calibrated_qa] Wrote 10000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 10000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 10000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 10000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[2m20:31:16[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 39 ready (after 126.14s)[0m[0m
+[2m20:31:16[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:31:16[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:31:17[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 10523.37it/s]
+[2m20:31:17[0m [1m   INFO[0m [1m[22mDetected 12/1024 rollouts (gibberish=12)[0m[0m
+[2m20:31:17[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 39 | Time: 127.28s | Reward: 0.8655 | Seq. Length: 537.4 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m20:31:18[0m [1m   INFO[0m [1m[22mStarting orchestrator step 40[0m[0m
+[2m20:31:18[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 40 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m20:33:21[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 40 ready (after 123.14s)[0m[0m
+[2m20:33:21[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:33:21[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:33:21[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 12070.72it/s]
+[2m20:33:22[0m [1m   INFO[0m [1m[22mDetected 6/1024 rollouts (gibberish=6)[0m[0m
+[2m20:33:22[0m [1m   INFO[0m [1m[22mLogging samples to W&B table at step 40[0m[0m
+[2m20:33:22[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 40 | Time: 124.18s | Reward: 0.8745 | Seq. Length: 537.3 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m20:33:22[0m [1m   INFO[0m [1m[22mStarting orchestrator step 41[0m[0m
+[2m20:33:22[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 41 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m20:35:26[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 41 ready (after 124.14s)[0m[0m
+[2m20:35:26[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:35:26[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:35:27[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 16164.42it/s]
+[2m20:35:27[0m [1m   INFO[0m [1m[22mDetected 16/1024 rollouts (gibberish=16)[0m[0m
+[2m20:35:27[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 41 | Time: 125.13s | Reward: 0.8800 | Seq. Length: 552.9 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 1[0m[0m
+[2m20:35:28[0m [1m   INFO[0m [1m[22mStarting orchestrator step 42[0m[0m
+[2m20:35:28[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 42 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[calibrated_qa] Wrote 11000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 11000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 11000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 11000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[2m20:37:33[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 42 ready (after 125.13s)[0m[0m
+[2m20:37:33[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:37:33[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:37:33[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 12937.08it/s]
+[2m20:37:34[0m [1m   INFO[0m [1m[22mDetected 12/1024 rollouts (gibberish=12)[0m[0m
+[2m20:37:34[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 42 | Time: 126.11s | Reward: 0.8792 | Seq. Length: 540.2 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m20:37:34[0m [1m   INFO[0m [1m[22mStarting orchestrator step 43[0m[0m
+[2m20:37:34[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 43 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m20:39:37[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 43 ready (after 123.13s)[0m[0m
+[2m20:39:37[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:39:37[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:39:38[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 12567.42it/s]
+[2m20:39:38[0m [1m   INFO[0m [1m[22mDetected 14/1024 rollouts (gibberish=14)[0m[0m
+[2m20:39:38[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 43 | Time: 124.26s | Reward: 0.8416 | Seq. Length: 545.1 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m20:39:39[0m [1m   INFO[0m [1m[22mStarting orchestrator step 44[0m[0m
+[2m20:39:39[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 44 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m20:41:43[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 44 ready (after 124.14s)[0m[0m
+[2m20:41:43[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:41:43[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:41:43[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 12223.45it/s]
+[2m20:41:44[0m [1m   INFO[0m [1m[22mDetected 8/1024 rollouts (gibberish=8)[0m[0m
+[2m20:41:44[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 44 | Time: 125.18s | Reward: 0.8694 | Seq. Length: 534.0 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m20:41:44[0m [1m   INFO[0m [1m[22mStarting orchestrator step 45[0m[0m
+[2m20:41:44[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 45 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m20:43:46[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 45 ready (after 122.13s)[0m[0m
+[2m20:43:46[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:43:46[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:43:47[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 12538.62it/s]
+[2m20:43:47[0m [1m   INFO[0m [1m[22mDetected 9/1024 rollouts (gibberish=9)[0m[0m
+[2m20:43:48[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 45 | Time: 123.26s | Reward: 0.8860 | Seq. Length: 535.8 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m20:43:48[0m [1m   INFO[0m [1m[22mStarting orchestrator step 46[0m[0m
+[2m20:43:48[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 46 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[calibrated_qa] Wrote 12000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 12000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 12000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[calibrated_qa] Wrote 12000 records to /root/outputs/calibrated-qa-gemma2-2b/rl/generations.jsonl
+[2m20:45:50[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 46 ready (after 122.13s)[0m[0m
+[2m20:45:50[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:45:50[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:45:51[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 10921.11it/s]
+[2m20:45:51[0m [1m   INFO[0m [1m[22mDetected 18/1024 rollouts (gibberish=18)[0m[0m
+[2m20:45:51[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 46 | Time: 123.15s | Reward: 0.8928 | Seq. Length: 552.4 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m20:45:51[0m [1m   INFO[0m [1m[22mStarting orchestrator step 47[0m[0m
+[2m20:45:51[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 47 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m20:47:56[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 47 ready (after 125.14s)[0m[0m
+[2m20:47:56[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:47:57[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:47:57[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 10039.43it/s]
+[2m20:47:57[0m [1m   INFO[0m [1m[22mDetected 6/1024 rollouts (gibberish=6)[0m[0m
+[2m20:47:58[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 47 | Time: 126.27s | Reward: 0.8612 | Seq. Length: 541.4 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m20:47:58[0m [1m   INFO[0m [1m[22mStarting orchestrator step 48[0m[0m
+[2m20:47:58[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 48 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m20:50:01[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 48 ready (after 123.14s)[0m[0m
+[2m20:50:01[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:50:01[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:50:02[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 15031.56it/s]
+[2m20:50:02[0m [1m   INFO[0m [1m[22mDetected 5/1024 rollouts (gibberish=5)[0m[0m
+[2m20:50:02[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 48 | Time: 124.13s | Reward: 0.8618 | Seq. Length: 547.8 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m20:50:02[0m [1m   INFO[0m [1m[22mStarting orchestrator step 49[0m[0m
+[2m20:50:02[0m [1m   INFO[0m [1m[22mOrchestrator paused: waiting for trainer process to complete checkpoint 49 (>0 step(s) ahead). Training is progressing normally.[0m[0m
+[2m20:52:08[0m [1m   INFO[0m [1m[22mOrchestrator resumed: checkpoint 49 ready (after 125.14s)[0m[0m
+[2m20:52:08[0m [1m   INFO[0m [1m[22mPausing inference engines for weight update[0m[0m
+[2m20:52:08[0m [1m   INFO[0m [1m[22mAll inference engines paused[0m[0m
+[2m20:52:08[0m [1m   INFO[0m [1m[22mAll inference engines resumed[0m[0m
+Generating rollouts (train):   0%|          | 0/1024 [00:00<?, ?it/s]Generating rollouts (train): 100%|██████████| 1024/1024 [00:00<00:00, 14084.54it/s]
+[2m20:52:08[0m [1m   INFO[0m [1m[22mDetected 10/1024 rollouts (gibberish=10)[0m[0m
+[2m20:52:09[0m [32m[1mSUCCESS[0m [32m[1m[22mStep 49 | Time: 126.26s | Reward: 0.9110 | Seq. Length: 549.4 tokens/sample | Async Level: 0 | Max. Off-Policy Level: 0[0m[0m
+[2m20:52:09[0m [1m   INFO[0m [1m[22mLogging final samples to W&B table[0m[0m
+[2m20:52:09[0m [1m   INFO[0m [1m[22mSaving final summary to file[0m[0m
+[2m20:52:09[0m [1m   INFO[0m [1m[22mWriting final checkpoint[0m[0m
+[2m20:52:11[0m [32m[1mSUCCESS[0m [32m[1m[22mOrchestrator finished.[0m[0m
+wandb: 
+wandb: Run history:
+wandb:                batch/calibrated-qa ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                 decode_len/all/max ▁▁▁▁▂▂▃▃▄▇█▇▇▆▄▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃
+wandb:                decode_len/all/mean ▁▁▁▁▁▂▂▃▆█▇▆▅▄▄▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃
+wandb:                 decode_len/all/min ▁▁▁▂▂▂▂▃▃▄█▇▆▄▅▄▄▄▄▄▄▄▃▃▃▄▄▃▃▃▃▃▃▃▃▃▃▃▃▃
+wandb:       decode_len/calibrated-qa/max ▁▁▁▁▂▂▃▃▄▇█▇▇▆▄▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃
+wandb:      decode_len/calibrated-qa/mean ▁▁▁▁▁▂▂▃▃▆█▆▅▄▄▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃
+wandb:       decode_len/calibrated-qa/min ▁▁▁▂▂▂▂▃▃▄█▇▆▄▅▄▄▄▄▄▄▄▃▃▃▄▄▃▃▃▃▃▃▃▃▄▃▃▃▃
+wandb:           effective_batch_size/all ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: effective_batch_size/calibrated-qa ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                 empty_rollouts/all ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                               +114 ...
+wandb: 
+wandb: Run summary:
+wandb:                batch/calibrated-qa 1
+wandb:                 decode_len/all/max 172.375
+wandb:                decode_len/all/mean 128.79335
+wandb:                 decode_len/all/min 102.75
+wandb:       decode_len/calibrated-qa/max 172.375
+wandb:      decode_len/calibrated-qa/mean 128.79335
+wandb:       decode_len/calibrated-qa/min 102.75
+wandb:           effective_batch_size/all 1
+wandb: effective_batch_size/calibrated-qa 1
+wandb:                 empty_rollouts/all 0
+wandb:                               +114 ...
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /root/outputs/calibrated-qa-gemma2-2b/rl/run_default/wandb/offline-run-20260326_190607-bc5zb82e
+wandb: Find logs at: /root/outputs/calibrated-qa-gemma2-2b/rl/run_default/wandb/offline-run-20260326_190607-bc5zb82e/logs
