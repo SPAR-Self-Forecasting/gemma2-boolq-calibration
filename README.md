@@ -1,5 +1,7 @@
 # RL for Calibration: Gemma 2 2B on BoolQ
 
+**Model**: [eruzak/gemma-2-2b-it-reasoning-high-boolq-calibration](https://huggingface.co/eruzak/gemma-2-2b-it-reasoning-high-boolq-calibration)
+
 Train Gemma 2 2B IT to give **calibrated YES/NO probability estimates** on BoolQ questions using RL (GRPO via [prime-rl](https://github.com/PrimeIntellect-ai/prime-rl)). The model reads a passage, reasons briefly, then outputs `ANSWER: YES/NO with XX% probability`.
 
 **Reward = 1 − Brier score**, with a bucket length penalty to encourage chain-of-thought reasoning without rambling.
