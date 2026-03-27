@@ -1,0 +1,11 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "calibrated-qa-no-passage"
+version = "0.1.0"
+dependencies = ["verifiers", "datasets"]
+
+[tool.hatch.build.targets.wheel]
+include = ["calibrated_qa_no_passage.py"]

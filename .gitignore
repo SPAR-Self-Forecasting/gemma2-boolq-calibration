@@ -3,3 +3,4 @@ results/generations.jsonl
 __pycache__/
 *.pyc
 .env
+results/*/generations.jsonl
