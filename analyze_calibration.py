@@ -202,6 +202,43 @@ def main():
         results_dir / "calibration_curves.png",
     )
 
+    # --- p_yes histograms over time ---
+    n_groups = len(ind_groups)
+    n_cols = min(4, n_groups)
+    n_rows = math.ceil(n_groups / n_cols)
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(4.5 * n_cols, 4 * n_rows), squeeze=False)
+    bins = np.arange(0, 1.05, 0.05)
+
+    for g_idx, group_records in enumerate(ind_groups):
+        ax = axes[g_idx // n_cols][g_idx % n_cols]
+        valid = [r for r in group_records if r.get("p_yes") is not None]
+        lo = g_idx * gs
+        hi = min((g_idx + 1) * gs, n_epochs) - 1
+
+        if valid:
+            p_vals = [r["p_yes"] for r in valid]
+            gt_yes = sum(1 for r in valid if str(r["ground_truth"]).lower() == "true")
+            pred_yes = sum(1 for r in valid if r["p_yes"] > 0.5)
+            ax.hist(p_vals, bins=bins, color="#2563eb", alpha=0.7, edgecolor="white", linewidth=0.5)
+            ax.axvline(0.5, color="black", linestyle="--", linewidth=1, alpha=0.5)
+            ax.set_title(f"Steps {lo}-{hi}\nGT YES: {100*gt_yes/len(valid):.0f}% | Pred YES: {100*pred_yes/len(valid):.0f}%", fontsize=10)
+        else:
+            ax.set_title(f"Steps {lo}-{hi}\n(no data)", fontsize=10)
+
+        ax.set_xlabel("p(YES)")
+        ax.set_ylabel("Count")
+        ax.set_xlim(0, 1)
+        ax.grid(True, alpha=0.2)
+
+    for idx in range(n_groups, n_rows * n_cols):
+        axes[idx // n_cols][idx % n_cols].set_visible(False)
+
+    fig.suptitle("p(YES) Distribution Over Training", fontsize=13, y=1.02)
+    fig.tight_layout()
+    hist_path = results_dir / "pyes_histograms.png"
+    fig.savefig(hist_path, dpi=150, bbox_inches="tight")
+    print(f"Saved {hist_path}")
+
     # --- Per-step metrics ---
     def compute_ece(p_list, actual_list, n_bins=10):
         p = np.array(p_list)
@@ -215,9 +252,29 @@ def main():
             ece += (mask.sum() / len(p)) * abs(a[mask].mean() - p[mask].mean())
         return ece
 
+    def compute_calib_err(confidence, correct, beta=100):
+        """RMS calibration error from HLE eval (fixed-size bins sorted by confidence)."""
+        confidence = np.array(confidence)
+        correct = np.array(correct)
+        idxs = np.argsort(confidence)
+        confidence = confidence[idxs]
+        correct = correct[idxs]
+        n = len(confidence)
+        if n < beta:
+            return np.nan
+        bins = [[i * beta, (i + 1) * beta] for i in range(n // beta)]
+        bins[-1][1] = n
+        cerr = 0.0
+        for lo, hi in bins:
+            bin_conf = confidence[lo:hi]
+            bin_corr = correct[lo:hi]
+            if len(bin_conf) > 0:
+                cerr += len(bin_conf) / n * np.square(np.abs(np.mean(bin_conf) - np.mean(bin_corr)))
+        return 100 * np.sqrt(cerr)
+
     def per_step_metrics(recs, step_sz):
         n_steps = max(1, math.ceil(len(recs) / step_sz))
-        steps, briers, eces, accs = [], [], [], []
+        steps, briers, eces, accs, hle_cerrs = [], [], [], [], []
         for s in range(n_steps):
             chunk = recs[s * step_sz:(s + 1) * step_sz]
             chunk_valid = [r for r in chunk if r.get("p_yes") is not None]
@@ -225,15 +282,19 @@ def main():
                 continue
             p_yes = [r["p_yes"] for r in chunk_valid]
             actual = [1.0 if str(r["ground_truth"]).lower() == "true" else 0.0 for r in chunk_valid]
+            # confidence in predicted answer (not in YES specifically)
+            pred_correct = [1.0 if (p > 0.5) == (a == 1.0) else 0.0 for p, a in zip(p_yes, actual)]
+            pred_confidence = [p if p > 0.5 else 1 - p for p in p_yes]
             steps.append(s)
             briers.append(np.mean([r["brier_score"] for r in chunk_valid]))
             eces.append(compute_ece(p_yes, actual))
-            accs.append(np.mean([1.0 if (p > 0.5) == (a == 1.0) else 0.0 for p, a in zip(p_yes, actual)]))
-        return steps, briers, eces, accs
+            accs.append(np.mean(pred_correct))
+            hle_cerrs.append(compute_calib_err(pred_confidence, pred_correct))
+        return steps, briers, eces, accs, hle_cerrs
 
-    ind_steps, ind_briers, ind_eces, ind_accs = per_step_metrics(records, step_size)
+    ind_steps, ind_briers, ind_eces, ind_accs, ind_hle = per_step_metrics(records, step_size)
 
-    fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+    fig, axes = plt.subplots(2, 3, figsize=(21, 10))
 
     ax = axes[0][0]
     ax.plot(ind_steps, ind_briers, "o-", color="#2563eb", linewidth=2, markersize=4)
@@ -249,6 +310,14 @@ def main():
     ax.set_title("Reward Over Training")
     ax.grid(True, alpha=0.3)
 
+    ax = axes[0][2]
+    ax.plot(ind_steps, ind_accs, "o-", color="#2563eb", linewidth=2, markersize=4)
+    ax.set_xlabel("Training step")
+    ax.set_ylabel("Accuracy")
+    ax.set_title("Accuracy Over Training (p>0.5 → YES)")
+    ax.set_ylim(0, 1)
+    ax.grid(True, alpha=0.3)
+
     ax = axes[1][0]
     ax.plot(ind_steps, ind_eces, "o-", color="#2563eb", linewidth=2, markersize=4)
     ax.set_xlabel("Training step")
@@ -257,12 +326,13 @@ def main():
     ax.grid(True, alpha=0.3)
 
     ax = axes[1][1]
-    ax.plot(ind_steps, ind_accs, "o-", color="#2563eb", linewidth=2, markersize=4)
+    ax.plot(ind_steps, ind_hle, "o-", color="#16a34a", linewidth=2, markersize=4)
     ax.set_xlabel("Training step")
-    ax.set_ylabel("Accuracy")
-    ax.set_title("Accuracy Over Training (p>0.5 → YES)")
-    ax.set_ylim(0, 1)
+    ax.set_ylabel("Calibration Error (0–100)")
+    ax.set_title("HLE-style Calibration Error Over Training")
     ax.grid(True, alpha=0.3)
+
+    axes[1][2].set_visible(False)
 
     fig.tight_layout()
     out_path = results_dir / "brier_over_time.png"
